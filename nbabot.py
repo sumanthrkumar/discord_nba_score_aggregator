@@ -20,10 +20,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 # Fetch today's NBA games
 def getTodaysGames():
     try:
-        
         board = scoreboard.ScoreBoard()
-        print(f"DEBUG: Fetching live data...")
-
         gamesData = board.get_dict()
         gameList = []
         
@@ -57,12 +54,9 @@ def getTodaysGames():
         print(f"An error occurred: {e}")
         return []
     
-
- # --- BUTTON CLASSES (Paste this BEFORE your @bot.command) ---
-
 class GameButton(Button):
     def __init__(self, gameInfo):
-        # Create a button with the matchup label (e.g., "LAL vs BOS")
+        # Create a button with the matchup label
         label = f"{gameInfo['matchup']} ({gameInfo['status']})"
         
         # custom_id stores the gameId so we know what to fetch when clicked
@@ -86,7 +80,6 @@ class ScoreboardView(View):
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}!')
-
 
 @bot.command()
 async def games(ctx):
